@@ -48,7 +48,8 @@ import azext_connectedk8s._clientproxyutils as clientproxyutils
 import azext_connectedk8s._troubleshootutils as troubleshootutils
 import azext_connectedk8s._precheckutils as precheckutils
 from glob import glob
-from .vendored_sdks.preview_2024_07_01.models import ConnectedCluster, ConnectedClusterIdentity, ListClusterUserCredentialProperties, ArcAgentryConfigurations, Gateway
+
+from .vendored_sdks.preview_2024_07_01.models import ConnectedCluster, ConnectedClusterIdentity, ListClusterUserCredentialProperties, ArcAgentryConfigurations, Gateway, OidcIssuerProfile
 from .vendored_sdks.preview_2022_10_01.models import ConnectedCluster as ConnectedClusterPreview
 from .vendored_sdks.preview_2022_10_01.models import ConnectedClusterPatch as ConnectedClusterPatchPreview
 import sys
@@ -894,6 +895,7 @@ def generate_request_payload(location, public_key, tags, kubernetes_distro, kube
         cc.arc_agentry_configurations = arc_agent_configurations
     if gateway is not None:
         cc.gateway = gateway
+        cc.oidc_issuer_profile = OidcIssuerProfile(enabled=True)
 
     if enable_private_link is not None or distribution_version is not None or azure_hybrid_benefit is not None:
         private_link_state = None
