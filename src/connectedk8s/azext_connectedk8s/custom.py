@@ -141,8 +141,8 @@ def create_connectedk8s(cmd, client, resource_group_name, cluster_name, correlat
         arc_agent_configurations = generate_arc_agent_configuration(configuration_settings, configuration_protected_settings)
 
     # Set preview client if latest preview properties are provided.
-    if enable_private_link is not None or distribution_version is not None or azure_hybrid_benefit is not None:
-        client = cf_connected_cluster_prev_2023_11_01(cmd.cli_ctx, None)
+    logger.warning("Bumping API version for private link")
+    client = cf_connected_cluster_prev_2023_11_01(cmd.cli_ctx, None)
 
     # Check if the provided Gateway ARM ID is valid
     gateway = None
